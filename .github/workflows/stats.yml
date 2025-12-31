@@ -15,20 +15,19 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
 
-          # Your Details
+          # User Details
           user: AbdulRehman-18
           filename: github-metrics.svg
           
-          # MINIMALIST CONFIGURATION
-          # We removed 'activity' and 'community' to declutter the view
-          base: header, repositories
-          base_indepth: yes
+          # 📉 SIZE FIX: "Compact" Mode
+          # We only keep the header. We REMOVE 'activity', 'community', and 'repositories' text.
+          base: header
           config_timezone: Asia/Kolkata
           
-          # THEME: Transparent background for a clean look
+          # Make it wide and short (Banner style)
           config_display: large
           
-          # 1. Languages (The Bar Graph)
+          # 1. Languages (Visual Bar)
           plugin_languages: yes
           plugin_languages_ignored: html, css
           plugin_languages_details: percentage
@@ -36,16 +35,16 @@ jobs:
           
           # 2. 3D Calendar (The Pyramid)
           plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
+          plugin_isocalendar_duration: half-year # 6 Months is shorter/cleaner than full year
           
-          # 3. Habits (Coding Time)
+          # 3. Habits (Simple Graph)
           plugin_habits: yes
           plugin_habits_from: 200
           plugin_habits_days: 14
-          plugin_habits_facts: no  # Removed text facts for minimalism
+          plugin_habits_facts: no # Removes the text text "You code mostly in day..."
           plugin_habits_charts: yes
 
-          # Committing Logic
+          # Save
           output_action: commit
           committer_branch: output
-          committer_message: "Update minimal metrics"
+          committer_message: "Update ultra-minimal metrics"
