@@ -1,0 +1,52 @@
+name: Generate Stats for Abdul
+
+on:
+  schedule:
+    - cron: "0 */12 * * *" # Runs every 12 hours
+  workflow_dispatch:
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your details
+          user: AbdulRehman-18
+          filename: github-metrics.svg
+          
+          # Configuration for the Output Branch
+          output_action: commit
+          committer_branch: output
+          committer_message: "Update metrics"
+          
+          # THEME: Dark mode with Red accent to match your profile
+          config_timezone: Asia/Kolkata
+          template: classic
+          base: header, activity, community, repositories, metadata
+          base_indepth: yes
+          config_order: base.header, base.activity+community, base.repositories, base.metadata
+          
+          # Plugin: Languages (Replaces your Language Card)
+          plugin_languages: yes
+          plugin_languages_ignored: html, css
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
+          
+          # Plugin: Isometric Calendar (Better than Streaks)
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          
+          # Plugin: Habits (Coding streaks)
+          plugin_habits: yes
+          plugin_habits_from: 200
+          plugin_habits_days: 14
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+
+        env:
+          # We use the built-in token. 
+          # It works for public data.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
